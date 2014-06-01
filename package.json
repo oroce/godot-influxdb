@@ -24,6 +24,6 @@
   },
   "dependencies": {
     "influx": "~0.4.0",
-    "godot": "~0.7.5"
+    "godot": "git://github.com/nodejitsu/godot"
   }
 }
