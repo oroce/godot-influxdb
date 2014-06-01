@@ -1,0 +1,29 @@
+{
+  "name": "godot-influxdb",
+  "version": "0.1.0",
+  "description": "influxdb reactor for godot",
+  "main": "influxdb.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/oroce/godot-influxdb"
+  },
+  "keywords": [
+    "godot",
+    "influxdb",
+    "reactor",
+    "timeseries",
+    "graphite"
+  ],
+  "author": "oroce <robert@oroszi.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oroce/godot-influxdb/issues"
+  },
+  "dependencies": {
+    "influx": "~0.4.0",
+    "godot": "~0.7.5"
+  }
+}
