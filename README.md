@@ -16,7 +16,16 @@
               password: 'root',
               database: 'a-existing-influx-database',
               port: 8083,
-              host: 'localhost'
+              host: 'localhost',
+              format: function(data) {
+                return {
+                  name: 'custom.name.because.i.can',
+                  metric: {
+                   'anything': 'that influx can understand',
+                   time: data.time,
+                   metaValue: data.meta.value
+                 }
+               };
             }));
         }
         

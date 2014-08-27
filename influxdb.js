@@ -12,22 +12,31 @@ var Influxdb = module.exports = function Influxdb(options) {
 
   this.client  = options.client    ||
                  influxdb(options.host, options.port, options.user, options.password, options.database);
+  
+  this.format = options.format || this._format;
 };
 
 util.inherits(Influxdb, ReadWriteStream);
 
-Influxdb.prototype.write = function (data) {
-  var self    = this;
+Influxdb.prototype._format = function (data) {
   var metricName = util.format('%s.%s.%s',
     this.prefix,
     data.host.replace(/\./g, '_'),
     data.service.replace(/\./g, '_').replace(/\//g, '.')
   );
+  return {
+    name: metricName,
+    metric: {
+      time: data.time,
+      value: data.metric
+    }
+  };
+};
 
-  this.client.writePoint(metricName, {
-    time: data.time,
-    value: data.metric
-  }, function(err) {
+Influxdb.prototype.write = function (data) {
+  var self    = this;
+  var point = this.format(data);
+  this.client.writePoint(point.name, point.metric, function(err) {
     if (err) {
       return self.emit('reactor:error', err);
     }
